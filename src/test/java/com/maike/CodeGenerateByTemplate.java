@@ -247,6 +247,7 @@ public class CodeGenerateByTemplate {
             genXmlByTemplate(table);
         }
     }
+
     /**
      * 生成代码
      */
