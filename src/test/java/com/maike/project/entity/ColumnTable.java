@@ -144,7 +144,8 @@ public class ColumnTable {
     }
 
     public String getDictType() {
-        return dictType;
+        String dbColumnType= GenUtil.getDbColumnType(getColumnType());
+        return GenUtil.mybatisType(dbColumnType);
     }
 
     public void setDictType(String dictType) {

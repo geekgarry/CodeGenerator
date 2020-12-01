@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -36,7 +41,7 @@ public class ${modelNameUpperCamel}Controller {
     * 删除 ${functionName}
     */
     @PostMapping("/delete")
-    public Result delete(@RequestParam ${pkColumn.javaType} ${pkColumn.smallColumnName}) {
+    public Result remove(@RequestParam ${pkColumn.javaType} ${pkColumn.smallColumnName}) {
         ${modelNameLowerCamel}Service.delete${modelNameUpperCamel}ById(${pkColumn.smallColumnName});
         return ResultGenerator.genSuccessResult();
     }
@@ -44,9 +49,9 @@ public class ${modelNameUpperCamel}Controller {
     /*
     * 批量删除 ${functionName}
     */
-    @PostMapping("/delete")
-    public Result delete(@RequestParam ${pkColumn.javaType}[] ${pkColumn.smallColumnName}) {
-        ${modelNameLowerCamel}Service.delete${modelNameUpperCamel}ByIds(${pkColumn.smallColumnName});
+    @DeleteMapping("/{${pkColumn.smallColumnName}s}")
+    public Result remove(@PathVariable ${pkColumn.javaType}[] ${pkColumn.smallColumnName}s) {
+        ${modelNameLowerCamel}Service.delete${modelNameUpperCamel}ByIds(${pkColumn.smallColumnName}s);
         return ResultGenerator.genSuccessResult();
     }
 
@@ -54,7 +59,7 @@ public class ${modelNameUpperCamel}Controller {
     * 更新 ${functionName}
     */
     @PostMapping("/update")
-    public Result update(${modelNameUpperCamel} ${modelNameLowerCamel}) {
+    public Result edit(${modelNameUpperCamel} ${modelNameLowerCamel}) {
         ${modelNameLowerCamel}Service.update${modelNameUpperCamel}(${modelNameLowerCamel});
         return ResultGenerator.genSuccessResult();
     }
@@ -74,7 +79,7 @@ public class ${modelNameUpperCamel}Controller {
     @PostMapping("/list")
     public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size,${modelNameUpperCamel} ${modelNameLowerCamel}) {
         PageHelper.startPage(page, size);
-        List<${modelNameUpperCamel}> list = ${modelNameLowerCamel}Service.query${modelNameUpperCamel}List(${modelNameLowerCamel});
+        List<${modelNameUpperCamel}> list = ${modelNameLowerCamel}Service.select${modelNameUpperCamel}List(${modelNameLowerCamel});
         PageInfo pageInfo = new PageInfo(list);
         return ResultGenerator.genSuccessResult(pageInfo);
     }

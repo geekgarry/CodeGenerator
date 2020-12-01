@@ -54,8 +54,8 @@ public class ${modelNameUpperCamel}ServiceImpl implements ${modelNameUpperCamel}
     /**
     * 查询全部
     */
-    public List<${modelNameUpperCamel}> query${modelNameUpperCamel}List(${modelNameUpperCamel} ${modelNameLowerCamel}){
-        return ${modelNameLowerCamel}Mapper.query${modelNameUpperCamel}List(${modelNameLowerCamel});
+    public List<${modelNameUpperCamel}> select${modelNameUpperCamel}List(${modelNameUpperCamel} ${modelNameLowerCamel}){
+        return ${modelNameLowerCamel}Mapper.select${modelNameUpperCamel}List(${modelNameLowerCamel});
     }
 
     /**

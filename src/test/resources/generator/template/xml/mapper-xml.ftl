@@ -7,7 +7,7 @@
 <mapper namespace="${basePackage}.project.dao.${modelNameUpperCamel}Mapper">
     <resultMap id="BaseResultMap" type="${basePackage}.project.model.${modelNameUpperCamel}">
         <#list allColumn as column>
-            <result property="${column.smallColumnName}" column="${column.columnName}" jdbcType="${column.javaType}" />
+            <result property="${column.smallColumnName}" column="${column.columnName}" jdbcType="${column.dictType}" />
         </#list>
     </resultMap>
 

@@ -36,7 +36,7 @@ public interface ${modelNameUpperCamel}Mapper {
     /**
     * 查询全部
     */
-    List<${modelNameUpperCamel}> query${modelNameUpperCamel}List(${modelNameUpperCamel} ${modelNameLowerCamel});
+    List<${modelNameUpperCamel}> select${modelNameUpperCamel}List(${modelNameUpperCamel} ${modelNameLowerCamel});
 
     /**
     * 根据Id查询单条数据

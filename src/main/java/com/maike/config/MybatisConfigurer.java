@@ -39,7 +39,7 @@ public class MybatisConfigurer {
 
         //添加XML目录
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        factory.setMapperLocations(resolver.getResources("classpath:mapper/*.xml"));
+        factory.setMapperLocations(resolver.getResources("classpath:mybatis/mapper/*.xml"));
         return factory.getObject();
     }
 
@@ -50,11 +50,11 @@ public class MybatisConfigurer {
         mapperScannerConfigurer.setBasePackage(ProjectConstant.MAPPER_PACKAGE);
 
         //配置通用Mapper，详情请查阅官方文档
-        Properties properties = new Properties();
-        properties.setProperty("mappers", ProjectConstant.MAPPER_INTERFACE_REFERENCE);
-        properties.setProperty("notEmpty", "false");//insert、update是否判断字符串类型!='' 即 test="str != null"表达式内是否追加 and str != ''
-        properties.setProperty("IDENTITY", "MYSQL");
-        mapperScannerConfigurer.setProperties(properties);
+        //Properties properties = new Properties();
+        //properties.setProperty("mappers", ProjectConstant.MAPPER_INTERFACE_REFERENCE);
+        //properties.setProperty("notEmpty", "false");//insert、update是否判断字符串类型!='' 即 test="str != null"表达式内是否追加 and str != ''
+        //properties.setProperty("IDENTITY", "MYSQL");
+        //mapperScannerConfigurer.setProperties(properties);
 
         return mapperScannerConfigurer;
     }

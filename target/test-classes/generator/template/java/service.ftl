@@ -37,7 +37,7 @@ public interface ${modelNameUpperCamel}Service {
     /**
     * 查询全部
     */
-    public List<${modelNameUpperCamel}> query${modelNameUpperCamel}List(${modelNameUpperCamel} ${modelNameLowerCamel});
+    public List<${modelNameUpperCamel}> select${modelNameUpperCamel}List(${modelNameUpperCamel} ${modelNameLowerCamel});
 
     /**
     * 根据Id查询单条数据

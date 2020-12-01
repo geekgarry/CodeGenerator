@@ -166,25 +166,25 @@ public class GenUtil {
         if (sqlTypeName == null || sqlTypeName.trim().equals("")) {
             return null;
         }
-        if(sqlTypeName.equals("VARCHAR") || sqlTypeName.equals("TEXT")){
+        if(sqlTypeName.equals("varchar") || sqlTypeName.equals("text")){
             type = "VARCHAR";
-        }else if(sqlTypeName.equals("TINYBLOB") || sqlTypeName.equals("BLOB") || sqlTypeName.equals("MEDIUMBLOB")){
+        }else if(sqlTypeName.equals("tinyblob") || sqlTypeName.equals("blob") || sqlTypeName.equals("mediumblob")){
             type = "BLOB";
-        } else if (sqlTypeName.equals("BIGINT")) {
+        } else if (sqlTypeName.equals("bigint")) {
             type = "INTEGER";
-        } else if (sqlTypeName.equals("TINYINT")) {
+        } else if (sqlTypeName.equals("tinyint")) {
             type = "INTEGER";
-        } else if (sqlTypeName.equals("SMALLINT")) {
+        } else if (sqlTypeName.equals("smallint")) {
             type = "INTEGER";
-        } else if (sqlTypeName.equals("CHAR")) {
+        } else if (sqlTypeName.equals("char")) {
             type = "CHAR";
-        } else if (sqlTypeName.equals("INT")) {
+        } else if (sqlTypeName.equals("int")) {
             type = "INTEGER";
-        } else if (sqlTypeName.equals("DATETIME") || sqlTypeName.equals("DATE")) {
+        } else if (sqlTypeName.equals("datetime") || sqlTypeName.equals("date")) {
             type = "TIMESTAMP";
-        } else if (sqlTypeName.equals("DECIMAL")) {
+        } else if (sqlTypeName.equals("decimal")) {
             type = "DECIMAL";
-        } else if (sqlTypeName.equals("INT UNSIGNED")) {
+        } else if (sqlTypeName.equals("int unsigned")) {
             type = "INTEGER";
         } else {
             System.out.println("sqlTypeName[" + sqlTypeName + "]");
