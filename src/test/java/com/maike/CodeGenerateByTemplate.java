@@ -274,8 +274,10 @@ public class CodeGenerateByTemplate {
 
     private static Configuration getJavaConfiguration() throws IOException {
         Configuration cfg = new Configuration(Configuration.VERSION_2_3_23);
-        //cfg.setDirectoryForTemplateLoading(new File(TEMPLATE_FILE_JAVA_PATH));
-        cfg.setClassForTemplateLoading(CodeGenerateByTemplate.class,"/generator/template/java/");
+        //基于文件系统
+        cfg.setDirectoryForTemplateLoading(new File(TEMPLATE_FILE_JAVA_PATH));
+        //类路径的方法其实这个方法是根据类加载路径来判断的，最终会执行以下代码：CodeGenerateByTemplate.class.getClassLoader().getResource("/generator/template/java/");
+        //cfg.setClassForTemplateLoading(CodeGenerateByTemplate.class,"/generator/template/java/");
         cfg.setDefaultEncoding("UTF-8");
         //cfg.setTemplateExceptionHandler(TemplateExceptionHandler.IGNORE_HANDLER);
         cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
@@ -285,8 +287,10 @@ public class CodeGenerateByTemplate {
 
     private static Configuration getMapperXmlConfiguration() throws IOException {
         Configuration cfg = new Configuration(Configuration.VERSION_2_3_23);
-        //cfg.setDirectoryForTemplateLoading(new File(TEMPLATE_FILE_XML_PATH));
-        cfg.setClassForTemplateLoading(CodeGenerateByTemplate.class,"/generator/template/xml/");
+        //基于文件系统
+        cfg.setDirectoryForTemplateLoading(new File(TEMPLATE_FILE_XML_PATH));
+        //类路径的方法其实这个方法是根据类加载路径来判断的，最终会执行以下代码：CodeGenerateByTemplate.class.getClassLoader().getResource("/generator/template/xml/");
+        //cfg.setClassForTemplateLoading(CodeGenerateByTemplate.class,"/generator/template/xml/");
         cfg.setDefaultEncoding("UTF-8");
         //cfg.setTemplateExceptionHandler(TemplateExceptionHandler.IGNORE_HANDLER);
         cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
