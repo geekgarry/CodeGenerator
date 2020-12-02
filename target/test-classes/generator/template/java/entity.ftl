@@ -1,5 +1,6 @@
 package ${basePackage}.project.model;
 
+import com.maike.core.BaseEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 <#list allColumn as item>
@@ -31,7 +32,7 @@ import java.math.BigInteger;
  * @author ${author}
  * @date ${date}
  */
-public class ${modelNameUpperCamel}
+public class ${modelNameUpperCamel} extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 

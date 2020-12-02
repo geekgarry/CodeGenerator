@@ -40,7 +40,7 @@ public class ${modelNameUpperCamel}Controller {
     /*
     * 删除 ${functionName}
     */
-    @PostMapping("/delete")
+    @GetMapping("/delete")
     public Result remove(@RequestParam ${pkColumn.javaType} ${pkColumn.smallColumnName}) {
         ${modelNameLowerCamel}Service.delete${modelNameUpperCamel}ById(${pkColumn.smallColumnName});
         return ResultGenerator.genSuccessResult();
@@ -67,7 +67,7 @@ public class ${modelNameUpperCamel}Controller {
     /*
     * 单条数据详情 ${functionName}
     */
-    @PostMapping("/detail")
+    @GetMapping("/detail")
     public Result detail(@RequestParam ${pkColumn.javaType} ${pkColumn.smallColumnName}) {
         ${modelNameUpperCamel} ${modelNameLowerCamel} = ${modelNameLowerCamel}Service.select${modelNameUpperCamel}ById(${pkColumn.smallColumnName});
         return ResultGenerator.genSuccessResult(${modelNameLowerCamel});
@@ -76,7 +76,7 @@ public class ${modelNameUpperCamel}Controller {
     /*
     * 查询所有 ${functionName}
     */
-    @PostMapping("/list")
+    @GetMapping("/list")
     public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size,${modelNameUpperCamel} ${modelNameLowerCamel}) {
         PageHelper.startPage(page, size);
         List<${modelNameUpperCamel}> list = ${modelNameLowerCamel}Service.select${modelNameUpperCamel}List(${modelNameLowerCamel});
