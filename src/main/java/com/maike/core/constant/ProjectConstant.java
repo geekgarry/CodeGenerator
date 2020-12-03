@@ -1,4 +1,4 @@
-package com.maike.core;
+package com.maike.core.constant;
 
 /**
  * 项目常量

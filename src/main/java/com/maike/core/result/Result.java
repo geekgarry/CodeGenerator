@@ -1,4 +1,4 @@
-package com.maike.core;
+package com.maike.core.result;
 
 import com.alibaba.fastjson.JSON;
 
@@ -37,8 +37,10 @@ public class Result<T> {
         return this;
     }
 
+
     @Override
     public String toString() {
         return JSON.toJSONString(this);
     }
+
 }

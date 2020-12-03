@@ -1,9 +1,10 @@
-package com.maike.core;
+package com.maike.core.result;
 
 /**
  * 响应码枚举，参考HTTP状态码的语义
  */
 public enum ResultCode {
+
     SUCCESS(200),//成功
     FAIL(400),//失败
     UNAUTHORIZED(401),//未认证（签名错误）

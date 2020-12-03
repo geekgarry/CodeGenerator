@@ -1,8 +1,9 @@
 package ${basePackage}.project.web;
-import ${basePackage}.core.Result;
-import ${basePackage}.core.ResultGenerator;
+import ${basePackage}.core.result.Result;
+import ${basePackage}.core.result.ResultGenerator;
 import ${basePackage}.project.model.${modelNameUpperCamel};
 import ${basePackage}.project.service.${modelNameUpperCamel}Service;
+import com.maike.common.entity.PageDataInfo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -74,13 +75,13 @@ public class ${modelNameUpperCamel}Controller {
     }
 
     /*
-    * 查询所有 ${functionName}
+    * 条件查询所有 ${functionName}
     */
     @GetMapping("/list")
-    public Result list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size,${modelNameUpperCamel} ${modelNameLowerCamel}) {
+    public PageDataInfo list(@RequestParam(defaultValue = "0") Integer page, @RequestParam(defaultValue = "0") Integer size,${modelNameUpperCamel} ${modelNameLowerCamel}) {
         PageHelper.startPage(page, size);
         List<${modelNameUpperCamel}> list = ${modelNameLowerCamel}Service.select${modelNameUpperCamel}List(${modelNameLowerCamel});
-        PageInfo pageInfo = new PageInfo(list);
-        return ResultGenerator.genSuccessResult(pageInfo);
+        //PageInfo pageInfo = new PageInfo(list);
+        return ResultGenerator.getPageData(list);
     }
 }

@@ -12,7 +12,7 @@
     </resultMap>
 
     <!--${title}-->
-    <!--${functionName}-->
+    <!--基础查询语句-->
     <sql id="baseSelectVo">
         select
         <#if allColumn?exists>
@@ -23,6 +23,7 @@
          from ${tableName}
     </sql>
 
+    <!--数据查询操作SQL-->
     <select id="select${modelNameUpperCamel}List" parameterType="${modelNameUpperCamel}" resultMap="BaseResultMap">
         <include refid="baseSelectVo"/>
         <where>
@@ -36,6 +37,7 @@
         </where>
     </select>
 
+    <!--单条数据或详情查询操作SQL-->
     <select id="select${modelNameUpperCamel}ById" parameterType="${pkColumn.javaType}" resultMap="BaseResultMap">
         <include refid="baseSelectVo"/>
         where
@@ -46,6 +48,7 @@
         </#list>
     </select>
 
+    <!--添加操作SQL-->
     <insert id="insert${modelNameUpperCamel}" parameterType="${modelNameUpperCamel}" <#if pkColumn.isIncrement=='1'> useGeneratedKeys="true" keyProperty="${pkColumn.smallColumnName}"</#if>>
         insert into ${tableName}
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -76,32 +79,24 @@
         </trim>
     </insert>
 
-    <update id="update${modelNameUpperCamel}" parameterType="${modelNameUpperCamel}">
-        update ${tableName}
-        <trim prefix="SET" suffixOverrides=",">
-            <#list allColumn as column>
-            <#if column.isPk !='1'>
-            <if test="${column.smallColumnName} != null <#if column.javaType == 'String' > and ${column.smallColumnName} != ''</#if>">${column.columnName} = ${r'#'}{${column.smallColumnName}},</if>
-            </#if>
-            </#list>
-        </trim>
-        where ${pkColumn.columnName} = ${r'#'}{${pkColumn.smallColumnName}}
-    </update>
-
+    <!--删除操作SQL-->
     <delete id="delete${modelNameUpperCamel}ById" parameterType="${pkColumn.javaType}">
         delete FROM ${tableName} where ${pkColumn.columnName} = ${r'#'}{${pkColumn.smallColumnName}}
     </delete>
+
     <!--逻辑删除-->
     <delete id="delete${modelNameUpperCamel}ById2" parameterType="${pkColumn.javaType}">
         update ${tableName} set del_flag='2' where ${pkColumn.columnName} = ${r'#'}{${pkColumn.smallColumnName}}
     </delete>
 
+    <!--删除操作SQL-->
     <delete id="delete${modelNameUpperCamel}ByIds" parameterType="${pkColumn.javaType}">
         delete FROM ${tableName} where ${pkColumn.columnName} in
         <foreach item="${pkColumn.smallColumnName}" collection="array" open="(" separator="," close=")">
              ${r'#'}{${pkColumn.smallColumnName}}
         </foreach>
     </delete>
+
     <!--逻辑批量删除-->
     <delete id="delete${modelNameUpperCamel}ByIds2" parameterType="${pkColumn.javaType}">
         update ${tableName} set del_flag='2' where ${pkColumn.columnName} in
@@ -109,4 +104,17 @@
             ${r'#'}{${pkColumn.smallColumnName}}
         </foreach>
     </delete>
+
+    <!--更新操作SQL-->
+    <update id="update${modelNameUpperCamel}" parameterType="${modelNameUpperCamel}">
+        update ${tableName}
+        <trim prefix="SET" suffixOverrides=",">
+            <#list allColumn as column>
+                <#if column.isPk !='1'>
+                    <if test="${column.smallColumnName} != null <#if column.javaType == 'String' > and ${column.smallColumnName} != ''</#if>">${column.columnName} = ${r'#'}{${column.smallColumnName}},</if>
+                </#if>
+            </#list>
+        </trim>
+        where ${pkColumn.columnName} = ${r'#'}{${pkColumn.smallColumnName}}
+    </update>
 </mapper>

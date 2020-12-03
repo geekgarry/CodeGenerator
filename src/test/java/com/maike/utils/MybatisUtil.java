@@ -133,6 +133,6 @@ public class MybatisUtil {
 
     public static void main(String[] args) {
         //System.out.println("数据表的信息 = [tableList:" + getTableInfoList().get(0).getPkColumn().get(0).getJavaField() + "]");
-        System.out.println("表的详细数据 = [" + JSONObjectUtil.objectToJson(getColumnTableList("fire_company")) + "]");
+        System.out.println("表的详细数据 = [" + JSONObjectUtil.objectToJson(getTableByName("fire_company")) + "]");
     }
 }

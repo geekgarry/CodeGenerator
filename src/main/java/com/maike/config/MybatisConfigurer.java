@@ -1,7 +1,7 @@
 package com.maike.config;
 
 import com.github.pagehelper.PageHelper;
-import com.maike.core.ProjectConstant;
+import com.maike.core.constant.ProjectConstant;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;

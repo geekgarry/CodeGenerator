@@ -1,6 +1,6 @@
 package ${basePackage}.project.model;
 
-import com.maike.core.BaseEntity;
+import com.maike.common.entity.BaseEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 <#list allColumn as item>

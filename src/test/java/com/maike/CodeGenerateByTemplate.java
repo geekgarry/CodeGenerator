@@ -1,6 +1,6 @@
 package com.maike;
 
-import com.maike.core.ProjectConstant;
+import com.maike.core.constant.ProjectConstant;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateExceptionHandler;
@@ -147,9 +147,9 @@ public class CodeGenerateByTemplate {
                 .mapTableNameToVarName(table.getTableName()));
         Map<String, Object> map = new HashMap<>();
         String tableComment=null;
-        if(table.getTableComment()!=null){
+        if(table.getTableComment()!=null||table.getTableComment()!=""){
             tableComment=table.getTableComment();
-        } else{
+        } else if(table.getTableComment()==""||table.getTableComment()!=null){
             tableComment="【请填写功能的名称或完成的事项】";
         }
         map.put("tableName",table.getTableName());
@@ -212,10 +212,10 @@ public class CodeGenerateByTemplate {
         String javaClassName = GenUtil.capitaFirstLetter(GenUtil
                 .mapTableNameToVarName(table.getTableName()));
         Map<String, Object> map = new HashMap<>();
-        String tableComment;
-        if(table.getTableComment()!=null){
+        String tableComment=null;
+        if(table.getTableComment()!=""){
             tableComment=table.getTableComment();
-        } else{
+        } else if(table.getTableComment()==""){
             tableComment="【请填写功能的名称或完成的事项】";
         }
         map.put("tableName",table.getTableName());
