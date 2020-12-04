@@ -219,7 +219,7 @@ public class CodeGenerateByTemplate {
             tableComment="【请填写功能的名称或完成的事项】";
         }
         map.put("tableName",table.getTableName());
-        map.put("title", tableComment);
+        map.put("tableAlias", GenUtil.getFirstChar(table.getTableName()));
         map.put("basePackage", ProjectConstant.BASE_PACKAGE);
         map.put("modelNameUpperCamel", javaClassName);
         map.put("modelNameLowerCamel", GenUtil

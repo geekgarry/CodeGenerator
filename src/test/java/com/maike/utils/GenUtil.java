@@ -254,6 +254,22 @@ public class GenUtil {
     }
 
     /**
+     * 把表名以_分割转换为每一小段的首字母缩写，用于表的别名
+     * @param tableName
+     * @return
+     */
+    public static String getFirstChar(String tableName){
+        StringBuilder sb = new StringBuilder();
+        // 清除sb缓存
+        sb.setLength(0);
+        String tableNameNew = tableName.replaceFirst("tb_", "");
+        String [] tableNameArray =  tableNameNew.split("_");
+        for(String name:tableNameArray){
+            sb.append(name.substring(0,1));
+        }
+        return sb.toString();
+    }
+    /**
      * 包名处理成路径名
      * @param packageName
      * @return
@@ -264,6 +280,8 @@ public class GenUtil {
 
     public static void main(String[] args) {
         //System.out.println("args = [" + mapTableNameToVarName("login_user") + "]");
-        System.out.println(getRequestMapping("fire"));
+        System.out.println(getRequestMapping("fire_company"));
+        //System.out.println(getFirstChar("fire_company_hazard"));
     }
+
 }

@@ -11,19 +11,22 @@
         </#list>
     </resultMap>
 
-    <!--${title}-->
+    <!--${functionName}-->
     <!--基础查询语句-->
     <sql id="baseSelectVo">
-        select
-        <#if allColumn?exists>
-            <#list allColumn as column>
-          ${column.columnName}<#if allColumnCount != column.sort>,</#if>
-            </#list>
-        </#if>
-         from ${tableName}
+        select <#if allColumn?exists>
+        <#list allColumn as column>${column.columnName}<#if allColumnCount != column.sort>,</#if></#list>
+        </#if> from ${tableName}
     </sql>
 
-    <!--数据查询操作SQL-->
+    <!--基础查询语句2,用作联合查询使用-->
+    <sql id="select${modelNameUpperCamel}Vo">
+        select <#if allColumn?exists>
+            <#list allColumn as column>${tableAlias}.${column.columnName}<#if allColumnCount != column.sort>,</#if></#list>
+        </#if> from ${tableName} ${tableAlias}
+    </sql>
+
+    <!--数据查询操作SQL(非联合查询)-->
     <select id="select${modelNameUpperCamel}List" parameterType="${modelNameUpperCamel}" resultMap="BaseResultMap">
         <include refid="baseSelectVo"/>
         <where>
@@ -31,6 +34,20 @@
                 <#list allColumn as column>
                     <if test="${column.smallColumnName?uncap_first} !=null">
                         AND ${column.columnName} = ${r'#'}{${column.smallColumnName?uncap_first},jdbcType=${column.javaType}}
+                    </if>
+                </#list>
+            </#if>
+        </where>
+    </select>
+
+    <!--数据联合查询操作SQL(联合查询)-->
+    <select id="selectUnion${modelNameUpperCamel}List" parameterType="${modelNameUpperCamel}" resultMap="BaseResultMap">
+        <include refid="select${modelNameUpperCamel}Vo"/>
+        <where>
+            <#if allColumn?exists>
+                <#list allColumn as column>
+                    <if test="${column.smallColumnName?uncap_first} !=null">
+                        AND ${tableAlias}.${column.columnName} = ${r'#'}{${column.smallColumnName?uncap_first},jdbcType=${column.javaType}}
                     </if>
                 </#list>
             </#if>
@@ -79,6 +96,26 @@
         </trim>
     </insert>
 
+    <!--批量添加操作SQL-->
+    <insert id="batchInsert${modelNameUpperCamel}List" parameterType="java.util.List">
+        insert into ${tableName}
+        (<#if pkColumn.isIncrement=='1'>
+         <#list allColumn as column><#if column.columnName!=pkColumn.columnName>${column.columnName}<#if allColumnCount != column.sort>,</#if></#if></#list>
+         <#else>
+         <#list allColumn as column>${column.columnName}<#if allColumnCount != column.sort>,</#if></#list>
+         </#if>
+        )
+         values
+        <foreach collection="list" item="item" index="index" separator=",">
+        (<#if pkColumn.isIncrement=='1'>
+         <#list allColumn as column><#if column.columnName!=pkColumn.columnName>${r'#'}{${r'item.'}${column.smallColumnName}}<#if allColumnCount != column.sort>,</#if></#if></#list>
+         <#else>
+         <#list allColumn as column>${r'#'}{${r'item.'}${column.columnName}}<#if allColumnCount != column.sort>,</#if></#list>
+         </#if>
+        )
+        </foreach>
+    </insert>
+
     <!--删除操作SQL-->
     <delete id="delete${modelNameUpperCamel}ById" parameterType="${pkColumn.javaType}">
         delete FROM ${tableName} where ${pkColumn.columnName} = ${r'#'}{${pkColumn.smallColumnName}}
@@ -115,6 +152,18 @@
                 </#if>
             </#list>
         </trim>
-        where ${pkColumn.columnName} = ${r'#'}{${pkColumn.smallColumnName}}
+         where ${pkColumn.columnName} = ${r'#'}{${pkColumn.smallColumnName}}
+    </update>
+
+    <!--批量更新某个字段-->
+    <update id="batchUpdate${modelNameUpperCamel}List" >
+        update ${tableName} set
+        <#if allColumn?exists>
+            <#list allColumn as column>${column.columnName}=''<#if allColumnCount != column.sort>,</#if></#list>
+        </#if>
+         where ${pkColumn.columnName} in
+        <foreach collection="array" item="item"  open="(" close=")" separator=",">
+            ${r'#'}{item}
+        </foreach>
     </update>
 </mapper>
