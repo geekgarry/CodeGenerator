@@ -17,6 +17,13 @@ public interface ${modelNameUpperCamel}Mapper {
     Integer insert${modelNameUpperCamel}(${modelNameUpperCamel} ${modelNameLowerCamel});
 
     /**
+    * 批量增加
+    * @param ${modelNameLowerCamel}List
+    * @return
+    */
+    public int batchInsert${modelNameUpperCamel}List(List<${modelNameUpperCamel}> ${modelNameLowerCamel}List);
+
+    /**
     * 删除
     * @param ${pkColumn.smallColumnName}
     */
@@ -34,9 +41,20 @@ public interface ${modelNameUpperCamel}Mapper {
     Integer update${modelNameUpperCamel}(${modelNameUpperCamel} ${modelNameLowerCamel});
 
     /**
+    * 批量修改魔偶几个字段
+    * @param ${pkColumn.smallColumnName}s
+    */
+    Integer batchUpdate${modelNameUpperCamel}List(${pkColumn.javaType}[] ${pkColumn.smallColumnName}s);
+
+    /**
     * 查询全部
     */
     List<${modelNameUpperCamel}> select${modelNameUpperCamel}List(${modelNameUpperCamel} ${modelNameLowerCamel});
+
+    /**
+    * 查询全部,联合查询使用
+    */
+    List<${modelNameUpperCamel}> selectUnion${modelNameUpperCamel}List(${modelNameUpperCamel} ${modelNameLowerCamel});
 
     /**
     * 根据Id查询单条数据

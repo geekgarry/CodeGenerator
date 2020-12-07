@@ -1,8 +1,11 @@
 package com.maike.utils;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.text.StringEscapeUtils;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
@@ -51,6 +54,26 @@ public class JSONObjectUtil {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * 根据前端数据返回实体类对象
+     * @return
+     */
+    public <T> T returnObject(String data, Class<T> ClassName){
+
+        //现将前端数据格式化
+        JSONObject dataFormat = dataFormat(data);
+
+        Object javaObject = JSON.toJavaObject(dataFormat, ClassName);
+        T cast = ClassName.cast(javaObject);
+        return cast;
+    }
+
+    private JSONObject dataFormat(String data) {
+        String info = StringEscapeUtils.unescapeHtml4(data);
+        com.alibaba.fastjson.JSONObject parseObject = com.alibaba.fastjson.JSONObject.parseObject(info);
+        return parseObject;
     }
 
     /**
